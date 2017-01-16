@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.5.2)
+
+project(googletest_download NONE)
+
+include(ExternalProject)
+
+# The GTEST_SETUP_URL needs to be wrapped in quotes and dereferenced.  This
+# is necessary to ensure CMake uses the content of the variable (not checking if
+# the variable exists).  
+if ("${GTEST_SETUP_URL}" STREQUAL "")
+	ExternalProject_Add(googletest_download
+		GIT_REPOSITORY      https://github.com/google/googletest.git
+		GIT_TAG             master
+		SOURCE_DIR          "${GTEST_SOURCE_DIR}"
+		BINARY_DIR          "${GTEST_BINARY_DIR}"
+		CONFIGURE_COMMAND   ""
+		BUILD_COMMAND       ""
+		INSTALL_COMMAND     ""
+		TEST_COMMAND        ""
+	)
+else()
+	ExternalProject_Add(googletest_download
+		URL		    "${GTEST_SETUP_URL}"
+		SOURCE_DIR          "${GTEST_SOURCE_DIR}"
+		BINARY_DIR          "${GTEST_BINARY_DIR}"
+		CONFIGURE_COMMAND   ""
+		BUILD_COMMAND       ""
+		INSTALL_COMMAND     ""
+		TEST_COMMAND        ""
+	)
+endif()
